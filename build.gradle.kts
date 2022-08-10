@@ -16,7 +16,7 @@ val smCommonVersion = "1.cb455aa"
 val mockkVersion = "1.12.5"
 val testContainerKafkaVersion = "1.17.3"
 val kotlinVersion = "1.7.10"
-val kotestVersion = "5.2.3"
+val kotestVersion = "5.4.1"
 
 tasks.withType<Jar> {
     manifest.attributes["Main-Class"] = "no.nav.syfo.BootstrapKt"
