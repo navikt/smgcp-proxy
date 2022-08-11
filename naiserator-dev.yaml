@@ -49,4 +49,4 @@ spec:
   ingresses:
     - "https://smgcp-proxy.dev.intern.nav.no"
     - "https://smgcp-proxy.dev-fss-pub.nais.io"
-  webproxy: false
+  webproxy: true
