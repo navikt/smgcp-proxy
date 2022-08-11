@@ -63,9 +63,8 @@ class BtsysApiKtTest : FunSpec({
         routing {
             get("/api/v1/suspensjon/status") {
                 when (call.request.headers["Nav-Personident"]) {
-                    fnr -> {
-                        call.respond(Suspendert(false))
-                    }
+                    fnr -> call.respond(Suspendert(false))
+                    else -> call.respond(HttpStatusCode.BadRequest)
                 }
             }
         }
@@ -116,6 +115,17 @@ class BtsysApiKtTest : FunSpec({
                 ) {
                     response.status() shouldBeEqualTo HttpStatusCode.OK
                     response.content shouldBeEqualTo "{\"suspendert\":false}"
+                }
+            }
+            test("Returnerer 500 hvis kall mot btsys feiler") {
+                with(
+                    handleRequest(HttpMethod.Get, "/btsys/api/v1/suspensjon/status?oppslagsdato=$oppslagsdato") {
+                        addHeader("Nav-Personident", "11223344")
+                        addHeader("Nav-Call-Id", "callId")
+                        addHeader("Nav-Consumer-Id", "consumerId")
+                    }
+                ) {
+                    response.status() shouldBeEqualTo HttpStatusCode.InternalServerError
                 }
             }
             test("Returnerer bad request hvis oppslagsdato mangler") {
