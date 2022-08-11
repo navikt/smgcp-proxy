@@ -1,5 +1,6 @@
 package no.nav.syfo.application
 
+import com.auth0.jwk.JwkProvider
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
@@ -9,6 +10,7 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.jackson.jackson
 import io.ktor.server.application.ApplicationCallPipeline
 import io.ktor.server.application.install
+import io.ktor.server.auth.authenticate
 import io.ktor.server.engine.ApplicationEngine
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
@@ -19,15 +21,24 @@ import io.ktor.server.response.respond
 import io.ktor.server.routing.routing
 import no.nav.syfo.Environment
 import no.nav.syfo.application.api.registerNaisApi
+import no.nav.syfo.application.authentication.setupAuth
 import no.nav.syfo.application.metrics.monitorHttpRequests
+import no.nav.syfo.btsys.BtsysClient
+import no.nav.syfo.btsys.registerBtsysApi
 import no.nav.syfo.log
 import java.util.UUID
 
 fun createApplicationEngine(
     env: Environment,
-    applicationState: ApplicationState
+    applicationState: ApplicationState,
+    jwkProvider: JwkProvider,
+    btsysClient: BtsysClient
 ): ApplicationEngine =
     embeddedServer(Netty, env.applicationPort) {
+        setupAuth(
+            environment = env,
+            jwkProvider = jwkProvider
+        )
         install(ContentNegotiation) {
             jackson {
                 registerKotlinModule()
@@ -51,6 +62,9 @@ fun createApplicationEngine(
 
         routing {
             registerNaisApi(applicationState)
+            authenticate("servicebruker") {
+                registerBtsysApi(btsysClient)
+            }
         }
         intercept(ApplicationCallPipeline.Monitoring, monitorHttpRequests())
     }
