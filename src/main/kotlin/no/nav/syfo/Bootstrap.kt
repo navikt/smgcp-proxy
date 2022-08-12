@@ -14,6 +14,7 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.network.sockets.SocketTimeoutException
 import io.ktor.serialization.jackson.jackson
 import io.prometheus.client.hotspot.DefaultExports
+import no.nav.emottak.subscription.SubscriptionPort
 import no.nav.syfo.application.ApplicationServer
 import no.nav.syfo.application.ApplicationState
 import no.nav.syfo.application.createApplicationEngine
@@ -21,7 +22,10 @@ import no.nav.syfo.application.exception.ServiceUnavailableException
 import no.nav.syfo.azuread.AccessTokenClient
 import no.nav.syfo.btsys.BtsysClient
 import no.nav.syfo.client.StsOidcClient
+import no.nav.syfo.emottak.EmottakClient
 import no.nav.syfo.kuhrsar.KuhrSarClient
+import no.nav.syfo.ws.createPort
+import org.apache.cxf.ws.addressing.WSAddressingFeature
 import org.apache.http.impl.conn.SystemDefaultRoutePlanner
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -86,13 +90,20 @@ fun main() {
         httpClient = httpClient
     )
 
+    val subscriptionEmottak = createPort<SubscriptionPort>(env.emottakEndpointURL) {
+        proxy { features.add(WSAddressingFeature()) }
+        port { withBasicAuth(serviceUser.username, serviceUser.password) }
+    }
+    val emottakClient = EmottakClient(subscriptionEmottak)
+
     val applicationState = ApplicationState()
     val applicationEngine = createApplicationEngine(
         env,
         applicationState,
         jwkProvider,
         btsysClient,
-        kuhrSarClient
+        kuhrSarClient,
+        emottakClient
     )
     val applicationServer = ApplicationServer(applicationEngine, applicationState)
     applicationServer.start()

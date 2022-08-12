@@ -15,7 +15,8 @@ data class Environment(
     val securityTokenServiceURL: String = getEnvVar("SECURITY_TOKEN_SERVICE_URL", "http://security-token-service.default/rest/v1/sts/token"),
     val btsysURL: String = getEnvVar("BTSYS_URL", "http://btsys.default"),
     val kuhrSarApiUrl: String = getEnvVar("KUHR_SAR_API_URL"),
-    val kuhrSarApiScope: String = getEnvVar("KUHR_SAR_API_SCOPE")
+    val kuhrSarApiScope: String = getEnvVar("KUHR_SAR_API_SCOPE"),
+    val emottakEndpointURL: String = getEnvVar("SUBSCRIPTION_ENDPOINT_URL")
 )
 
 data class ServiceUser(
