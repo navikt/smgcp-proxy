@@ -25,6 +25,8 @@ import no.nav.syfo.application.authentication.setupAuth
 import no.nav.syfo.application.metrics.monitorHttpRequests
 import no.nav.syfo.btsys.BtsysClient
 import no.nav.syfo.btsys.registerBtsysApi
+import no.nav.syfo.kuhrsar.KuhrSarClient
+import no.nav.syfo.kuhrsar.registerKuhrSarApi
 import no.nav.syfo.log
 import java.util.UUID
 
@@ -32,7 +34,8 @@ fun createApplicationEngine(
     env: Environment,
     applicationState: ApplicationState,
     jwkProvider: JwkProvider,
-    btsysClient: BtsysClient
+    btsysClient: BtsysClient,
+    kuhrSarClient: KuhrSarClient
 ): ApplicationEngine =
     embeddedServer(Netty, env.applicationPort) {
         setupAuth(
@@ -64,6 +67,7 @@ fun createApplicationEngine(
             registerNaisApi(applicationState)
             authenticate("servicebruker") {
                 registerBtsysApi(btsysClient)
+                registerKuhrSarApi(kuhrSarClient)
             }
         }
         intercept(ApplicationCallPipeline.Monitoring, monitorHttpRequests())
