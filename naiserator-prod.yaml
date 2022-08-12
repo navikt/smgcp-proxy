@@ -33,9 +33,16 @@ spec:
     requests:
       cpu: 400m
       memory: 768Mi
+  azure:
+    application:
+      enabled: true
+      tenant: nav.no
   vault:
-    enabled: false
+    enabled: true
+    paths:
+      - kvPath: serviceuser/data/prod/srvsmgcpproxy
+        mountPath: /secrets/serviceuser
   ingresses:
     - "https://smgcp-proxy.intern.nav.no"
     - "https://smgcp-proxy.prod-fss-pub.nais.io"
-  webproxy: false
+  webproxy: true
