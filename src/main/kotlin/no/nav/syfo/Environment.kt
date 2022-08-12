@@ -7,11 +7,15 @@ import java.nio.file.Paths
 data class Environment(
     val applicationPort: Int = getEnvVar("APPLICATION_PORT", "8080").toInt(),
     val applicationName: String = getEnvVar("NAIS_APP_NAME", "smgcp-proxy"),
+    val aadAccessTokenUrl: String = getEnvVar("AZURE_OPENID_CONFIG_TOKEN_ENDPOINT"),
     val clientId: String = getEnvVar("AZURE_APP_CLIENT_ID"),
+    val clientSecret: String = getEnvVar("AZURE_APP_CLIENT_SECRET"),
     val jwkKeysUrl: String = getEnvVar("AZURE_OPENID_CONFIG_JWKS_URI"),
     val jwtIssuer: String = getEnvVar("AZURE_OPENID_CONFIG_ISSUER"),
     val securityTokenServiceURL: String = getEnvVar("SECURITY_TOKEN_SERVICE_URL", "http://security-token-service.default/rest/v1/sts/token"),
-    val btsysURL: String = getEnvVar("BTSYS_URL", "http://btsys.default")
+    val btsysURL: String = getEnvVar("BTSYS_URL", "http://btsys.default"),
+    val kuhrSarApiUrl: String = getEnvVar("KUHR_SAR_API_URL"),
+    val kuhrSarApiScope: String = getEnvVar("KUHR_SAR_API_SCOPE")
 )
 
 data class ServiceUser(
