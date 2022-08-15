@@ -43,6 +43,9 @@ spec:
         - application: syfosmregler
           namespace: teamsykmelding
           cluster: dev-gcp
+        - application: pale-2-regler
+          namespace: teamsykmelding
+          cluster: dev-gcp
   vault:
     enabled: true
     paths:
