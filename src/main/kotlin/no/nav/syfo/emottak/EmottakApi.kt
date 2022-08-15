@@ -12,6 +12,7 @@ fun Route.registerEmottakApi(emottakClient: EmottakClient) {
     post("/emottak/startsubscription") {
         log.info("Mottatt proxy-request for emottak")
         val startSubscriptionRequest = call.receiveOrNull<StartSubscriptionRequest>()
+        val callId = call.request.headers["Nav-Call-Id"]
 
         if (startSubscriptionRequest == null) {
             log.warn("Mottatt request uten body")
@@ -27,7 +28,7 @@ fun Route.registerEmottakApi(emottakClient: EmottakClient) {
             )
             call.respond(HttpStatusCode.OK)
         } catch (e: Exception) {
-            log.error("Noe gikk galt ved kall til emottak: ${e.message}")
+            log.error("Noe gikk galt ved kall til emottak: ${e.message} for callId $callId")
             call.respond(HttpStatusCode.InternalServerError, e.message ?: "Noe gikk galt ved proxykall til emottak")
         }
     }
