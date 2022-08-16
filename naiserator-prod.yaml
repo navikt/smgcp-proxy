@@ -52,9 +52,6 @@ spec:
         - application: pale-2
           namespace: teamsykmelding
           cluster: prod-gcp
-        - application: syfosmarena
-          namespace: teamsykmelding
-          cluster: prod-gcp
         - application: syfosmpapirregler
           namespace: teamsykmelding
           cluster: prod-gcp
