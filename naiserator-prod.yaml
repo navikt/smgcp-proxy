@@ -55,6 +55,9 @@ spec:
         - application: syfosmpapirregler
           namespace: teamsykmelding
           cluster: prod-gcp
+        - application: syfosmpapirmottak
+          namespace: teamsykmelding
+          cluster: prod-gcp
   vault:
     enabled: true
     paths:
