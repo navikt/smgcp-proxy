@@ -58,6 +58,9 @@ spec:
         - application: syfosmpapirmottak
           namespace: teamsykmelding
           cluster: prod-gcp
+        - application: smregistrering-backend
+          namespace: teamsykmelding
+          cluster: prod-gcp
   vault:
     enabled: true
     paths:
