@@ -44,6 +44,7 @@ buildscript {
         classpath("com.sun.activation:javax.activation:1.2.0")
         classpath("com.sun.xml.ws:jaxws-tools:2.3.1") {
             exclude(group = "com.sun.xml.ws", module = "policy")
+            exclude(group = "org.apache.commons", module = "commons-text")
         }
     }
 }
@@ -71,10 +72,12 @@ dependencies {
     cxfCodegen ("javax.xml.ws:jaxws-api:$jaxwsApiVersion")
     cxfCodegen ("com.sun.xml.ws:jaxws-tools:$jaxwsToolsVersion") {
         exclude(group = "com.sun.xml.ws", module = "policy")
+        exclude(group = "org.apache.commons", module = "commons-text")
     }
     cxfCodegen("com.sun.xml.bind:jaxb-impl:2.3.3")
     cxfCodegen("jakarta.xml.ws:jakarta.xml.ws-api:2.3.3")
     cxfCodegen("jakarta.annotation:jakarta.annotation-api:1.3.5")
+    cxfCodegen("org.apache.commons:commons-text:$commonsTextVersion")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
 
@@ -111,6 +114,7 @@ dependencies {
     implementation("javax.activation:activation:$javaxActivationVersion")
     implementation("com.sun.xml.ws:jaxws-tools:$jaxwsToolsVersion") {
         exclude(group = "com.sun.xml.ws", module = "policy")
+        exclude(group = "org.apache.commons", module = "commons-text")
     }
     implementation("org.apache.commons:commons-text:$commonsTextVersion")
 
