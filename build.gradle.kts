@@ -30,7 +30,7 @@ tasks.withType<Jar> {
 }
 
 plugins {
-    id("io.mateo.cxf-codegen") version "1.0.0-rc.3"
+    id("io.mateo.cxf-codegen") version "1.0.1"
     id("org.jmailen.kotlinter") version "3.10.0"
     kotlin("jvm") version "1.7.20"
     id("com.diffplug.spotless") version "6.5.0"
