@@ -25,13 +25,14 @@ val jaxbApiVersion = "2.4.0-b180830.0359"
 val javaxActivationVersion = "1.1.1"
 val commonsTextVersion = "1.10.0"
 val nettyCodecVersion = "4.1.86.Final"
+val cxfVersion = "3.5.5"
 
 tasks.withType<Jar> {
     manifest.attributes["Main-Class"] = "no.nav.syfo.BootstrapKt"
 }
 
 plugins {
-    id("io.mateo.cxf-codegen") version "1.0.1"
+    id("io.mateo.cxf-codegen") version "1.0.2"
     id("org.jmailen.kotlinter") version "3.12.0"
     kotlin("jvm") version "1.7.22"
     id("com.diffplug.spotless") version "6.5.0"
@@ -79,6 +80,7 @@ dependencies {
     cxfCodegen("jakarta.xml.ws:jakarta.xml.ws-api:2.3.3")
     cxfCodegen("jakarta.annotation:jakarta.annotation-api:1.3.5")
     cxfCodegen("org.apache.commons:commons-text:$commonsTextVersion")
+    cxfCodegen("org.apache.cxf:cxf-core:$cxfVersion")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
 
