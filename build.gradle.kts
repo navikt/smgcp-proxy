@@ -8,14 +8,14 @@ version = "1.0.0"
 val coroutinesVersion = "1.6.4"
 val jacksonVersion = "2.14.1"
 val kluentVersion = "1.72"
-val ktorVersion = "2.2.1"
+val ktorVersion = "2.2.2"
 val logbackVersion = "1.4.5"
 val logstashEncoderVersion = "7.2"
 val prometheusVersion = "0.16.0"
-val smCommonVersion = "1.1490275"
+val smCommonVersion = "1.d6548c5"
 val mockkVersion = "1.13.2"
 val testContainerKafkaVersion = "1.17.6"
-val kotlinVersion = "1.7.22"
+val kotlinVersion = "1.8.0"
 val kotestVersion = "5.5.4"
 val javaxAnnotationApiVersion = "1.3.2"
 val jaxwsToolsVersion = "2.3.2"
@@ -24,7 +24,6 @@ val jaxbRuntimeVersion = "2.4.0-b180830.0438"
 val jaxbApiVersion = "2.4.0-b180830.0359"
 val javaxActivationVersion = "1.1.1"
 val commonsTextVersion = "1.10.0"
-val nettyCodecVersion = "4.1.86.Final"
 val cxfVersion = "3.5.5"
 
 tasks.withType<Jar> {
@@ -34,7 +33,7 @@ tasks.withType<Jar> {
 plugins {
     id("io.mateo.cxf-codegen") version "1.0.2"
     id("org.jmailen.kotlinter") version "3.12.0"
-    kotlin("jvm") version "1.7.22"
+    kotlin("jvm") version "1.8.0"
     id("com.diffplug.spotless") version "6.5.0"
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
@@ -90,9 +89,6 @@ dependencies {
 
     implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-server-netty:$ktorVersion")
-    // This is to override version that is in io.ktor:ktor-server-netty
-    // https://www.cve.org/CVERecord?id=CVE-2022-41915
-    implementation("io.netty:netty-codec:$nettyCodecVersion")
     implementation("io.ktor:ktor-server-auth:$ktorVersion")
     implementation("io.ktor:ktor-server-auth-jwt:$ktorVersion")
     implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
@@ -164,9 +160,12 @@ tasks {
     }
 
     withType<Test> {
-        useJUnitPlatform {
+        useJUnitPlatform {}
+        testLogging {
+            events("skipped", "failed")
+            showStackTraces = true
+            exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
         }
-        testLogging.showStandardStreams = true
     }
 
     "check" {
