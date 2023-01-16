@@ -2,7 +2,7 @@ package no.nav.syfo.emottak
 
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.call
-import io.ktor.server.request.receiveOrNull
+import io.ktor.server.request.receiveNullable
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
 import io.ktor.server.routing.post
@@ -11,7 +11,7 @@ import no.nav.syfo.log
 fun Route.registerEmottakApi(emottakClient: EmottakClient) {
     post("/emottak/startsubscription") {
         log.info("Mottatt proxy-request for emottak")
-        val startSubscriptionRequest = call.receiveOrNull<StartSubscriptionRequest>()
+        val startSubscriptionRequest = call.receiveNullable<StartSubscriptionRequest>()
         val callId = call.request.headers["Nav-Call-Id"]
 
         if (startSubscriptionRequest == null) {
