@@ -6,16 +6,16 @@ group = "no.nav.syfo"
 version = "1.0.0"
 
 val coroutinesVersion = "1.6.4"
-val jacksonVersion = "2.14.1"
+val jacksonVersion = "2.14.2"
 val kluentVersion = "1.72"
-val ktorVersion = "2.2.2"
+val ktorVersion = "2.2.3"
 val logbackVersion = "1.4.5"
 val logstashEncoderVersion = "7.2"
 val prometheusVersion = "0.16.0"
-val smCommonVersion = "1.d6548c5"
+val smCommonVersion = "1.fbf33a9"
 val mockkVersion = "1.13.2"
 val testContainerKafkaVersion = "1.17.6"
-val kotlinVersion = "1.8.0"
+val kotlinVersion = "1.8.10"
 val kotestVersion = "5.5.4"
 val javaxAnnotationApiVersion = "1.3.2"
 val jaxwsToolsVersion = "2.3.2"
@@ -26,14 +26,10 @@ val javaxActivationVersion = "1.1.1"
 val commonsTextVersion = "1.10.0"
 val cxfVersion = "3.5.5"
 
-tasks.withType<Jar> {
-    manifest.attributes["Main-Class"] = "no.nav.syfo.BootstrapKt"
-}
 
 plugins {
     id("io.mateo.cxf-codegen") version "1.0.2"
-    id("org.jmailen.kotlinter") version "3.12.0"
-    kotlin("jvm") version "1.8.0"
+    kotlin("jvm") version "1.8.10"
     id("com.diffplug.spotless") version "6.5.0"
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
@@ -134,8 +130,14 @@ dependencies {
 
 tasks {
 
+    withType<Jar> {
+        manifest.attributes["Main-Class"] = "no.nav.syfo.BootstrapKt"
+    }
+
     create("printVersion") {
-        println(project.version)
+        doLast {
+            println(project.version)
+        }
     }
 
     cxfCodegen {
@@ -168,7 +170,4 @@ tasks {
         }
     }
 
-    "check" {
-        dependsOn("formatKotlin")
-    }
 }
