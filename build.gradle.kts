@@ -30,8 +30,7 @@ val cxfVersion = "3.5.5"
 plugins {
     id("io.mateo.cxf-codegen") version "1.0.2"
     kotlin("jvm") version "1.8.10"
-    id("com.diffplug.spotless") version "6.5.0"
-    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 buildscript {
@@ -118,7 +117,6 @@ dependencies {
 
     testImplementation("org.amshove.kluent:kluent:$kluentVersion") 
     testImplementation("io.mockk:mockk:$mockkVersion")
-    testImplementation("org.testcontainers:kafka:$testContainerKafkaVersion")
     testImplementation("io.ktor:ktor-server-test-host:$ktorVersion") {
         exclude(group = "org.eclipse.jetty") 
     }
