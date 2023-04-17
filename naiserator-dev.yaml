@@ -71,9 +71,5 @@ spec:
     - "https://smgcp-proxy.dev-fss-pub.nais.io"
   webproxy: true
   env:
-    - name: KUHR_SAR_API_SCOPE
-      value: api://dev-fss.teamkuhr.kuhr-sar-api/.default
-    - name: KUHR_SAR_API_URL
-      value: https://kuhr-sar-api.dev.adeo.no
     - name: SUBSCRIPTION_ENDPOINT_URL
       value: https://wasapp-q1.adeo.no/nav-emottak-eletter-web/services/

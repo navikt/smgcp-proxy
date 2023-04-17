@@ -19,17 +19,13 @@ import no.nav.syfo.application.ApplicationServer
 import no.nav.syfo.application.ApplicationState
 import no.nav.syfo.application.createApplicationEngine
 import no.nav.syfo.application.exception.ServiceUnavailableException
-import no.nav.syfo.azuread.AccessTokenClient
 import no.nav.syfo.btsys.BtsysClient
 import no.nav.syfo.client.StsOidcClient
 import no.nav.syfo.emottak.EmottakClient
-import no.nav.syfo.kuhrsar.KuhrSarClient
 import no.nav.syfo.ws.createPort
 import org.apache.cxf.ws.addressing.WSAddressingFeature
-import org.apache.http.impl.conn.SystemDefaultRoutePlanner
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import java.net.ProxySelector
 import java.net.URL
 import java.util.concurrent.TimeUnit
 
@@ -63,32 +59,12 @@ fun main() {
         }
         expectSuccess = false
     }
-    val proxyConfig: HttpClientConfig<ApacheEngineConfig>.() -> Unit = {
-        config()
-        engine {
-            customizeClient {
-                setRoutePlanner(SystemDefaultRoutePlanner(ProxySelector.getDefault()))
-            }
-        }
-    }
+
     val httpClient = HttpClient(Apache, config)
-    val httpClientWithProxy = HttpClient(Apache, proxyConfig)
 
     val stsOidcClient = StsOidcClient(serviceUser.username, serviceUser.password, env.securityTokenServiceURL)
-    val accessTokenClient = AccessTokenClient(
-        env.aadAccessTokenUrl,
-        env.clientId,
-        env.clientSecret,
-        httpClientWithProxy
-    )
 
     val btsysClient = BtsysClient(env.btsysURL, stsOidcClient, httpClient)
-    val kuhrSarClient = KuhrSarClient(
-        endpointUrl = env.kuhrSarApiUrl,
-        accessTokenClient = accessTokenClient,
-        scope = env.kuhrSarApiScope,
-        httpClient = httpClient
-    )
 
     val subscriptionEmottak = createPort<SubscriptionPort>(env.emottakEndpointURL) {
         proxy { features.add(WSAddressingFeature()) }
@@ -102,7 +78,6 @@ fun main() {
         applicationState,
         jwkProvider,
         btsysClient,
-        kuhrSarClient,
         emottakClient
     )
     val applicationServer = ApplicationServer(applicationEngine, applicationState)
