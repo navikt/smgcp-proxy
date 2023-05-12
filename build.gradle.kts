@@ -5,14 +5,14 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 group = "no.nav.syfo"
 version = "1.0.0"
 
-val coroutinesVersion = "1.6.4"
+val coroutinesVersion = "1.7.0"
 val jacksonVersion = "2.15.0"
 val kluentVersion = "1.72"
 val ktorVersion = "2.3.0"
 val logbackVersion = "1.4.5"
-val logstashEncoderVersion = "7.2"
+val logstashEncoderVersion = "7.3"
 val prometheusVersion = "0.16.0"
-val smCommonVersion = "1.0.1"
+val smCommonVersion = "1.0.2"
 val mockkVersion = "1.13.2"
 val testContainerKafkaVersion = "1.17.6"
 val kotlinVersion = "1.8.20"
@@ -29,7 +29,7 @@ val cxfVersion = "3.5.5"
 
 plugins {
     id("io.mateo.cxf-codegen") version "1.0.2"
-    kotlin("jvm") version "1.8.20"
+    kotlin("jvm") version "1.8.21"
     id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
