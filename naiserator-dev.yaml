@@ -61,6 +61,9 @@ spec:
         - application: smregistrering-backend
           namespace: teamsykmelding
           cluster: dev-gcp
+        - application: padm2
+          namespace: teamsykefravr
+          cluster: dev-gcp
   vault:
     enabled: true
     paths:
