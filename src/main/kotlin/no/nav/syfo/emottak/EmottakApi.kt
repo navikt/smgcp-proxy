@@ -29,7 +29,10 @@ fun Route.registerEmottakApi(emottakClient: EmottakClient) {
             call.respond(HttpStatusCode.OK)
         } catch (e: Exception) {
             log.error("Noe gikk galt ved kall til emottak: ${e.message} for callId $callId")
-            call.respond(HttpStatusCode.InternalServerError, e.message ?: "Noe gikk galt ved proxykall til emottak")
+            call.respond(
+                HttpStatusCode.InternalServerError,
+                e.message ?: "Noe gikk galt ved proxykall til emottak"
+            )
         }
     }
 }

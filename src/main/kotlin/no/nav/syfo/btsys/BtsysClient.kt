@@ -23,18 +23,19 @@ class BtsysClient(
         callId: String,
         consumerId: String
     ): Suspendert {
-        val httpResponse = httpClient.get("$endpointUrl/api/v1/suspensjon/status") {
-            accept(ContentType.Application.Json)
-            val oidcToken = stsClient.oidcToken()
-            headers {
-                append("Nav-Call-Id", callId)
-                append("Nav-Consumer-Id", consumerId)
-                append("Nav-Personident", behandlerFnr)
+        val httpResponse =
+            httpClient.get("$endpointUrl/api/v1/suspensjon/status") {
+                accept(ContentType.Application.Json)
+                val oidcToken = stsClient.oidcToken()
+                headers {
+                    append("Nav-Call-Id", callId)
+                    append("Nav-Consumer-Id", consumerId)
+                    append("Nav-Personident", behandlerFnr)
 
-                append("Authorization", "Bearer ${oidcToken.access_token}")
+                    append("Authorization", "Bearer ${oidcToken.access_token}")
+                }
+                parameter("oppslagsdato", oppslagsdato)
             }
-            parameter("oppslagsdato", oppslagsdato)
-        }
 
         when (httpResponse.status) {
             HttpStatusCode.OK -> {
@@ -43,7 +44,9 @@ class BtsysClient(
             }
             else -> {
                 log.warn("Btsys svarte med kode {} for callId {}", httpResponse.status, callId)
-                throw IOException("Btsys svarte med uventet kode ${httpResponse.status} for $callId")
+                throw IOException(
+                    "Btsys svarte med uventet kode ${httpResponse.status} for $callId"
+                )
             }
         }
     }

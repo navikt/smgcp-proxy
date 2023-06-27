@@ -35,16 +35,20 @@ fun Route.registerBtsysApi(btsysClient: BtsysClient) {
         }
 
         try {
-            val suspensjonsstatus = btsysClient.getSuspensjonsstatus(
-                behandlerFnr = behandlerFnr,
-                oppslagsdato = oppslagsdato,
-                callId = callId,
-                consumerId = consumerId
-            )
+            val suspensjonsstatus =
+                btsysClient.getSuspensjonsstatus(
+                    behandlerFnr = behandlerFnr,
+                    oppslagsdato = oppslagsdato,
+                    callId = callId,
+                    consumerId = consumerId
+                )
             call.respond(suspensjonsstatus)
         } catch (e: IOException) {
             log.error("Noe gikk galt ved kall til Btsys: ${e.message}")
-            call.respond(HttpStatusCode.InternalServerError, e.message ?: "Noe gikk galt ved proxykall til btsys")
+            call.respond(
+                HttpStatusCode.InternalServerError,
+                e.message ?: "Noe gikk galt ved proxykall til btsys"
+            )
         }
     }
 }

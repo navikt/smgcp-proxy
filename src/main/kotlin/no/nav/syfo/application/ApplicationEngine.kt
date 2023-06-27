@@ -19,6 +19,7 @@ import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.plugins.statuspages.StatusPages
 import io.ktor.server.response.respond
 import io.ktor.server.routing.routing
+import java.util.UUID
 import no.nav.syfo.Environment
 import no.nav.syfo.application.api.registerNaisApi
 import no.nav.syfo.application.authentication.setupAuth
@@ -28,7 +29,6 @@ import no.nav.syfo.btsys.registerBtsysApi
 import no.nav.syfo.emottak.EmottakClient
 import no.nav.syfo.emottak.registerEmottakApi
 import no.nav.syfo.log
-import java.util.UUID
 
 fun createApplicationEngine(
     env: Environment,
@@ -38,10 +38,7 @@ fun createApplicationEngine(
     emottakClient: EmottakClient
 ): ApplicationEngine =
     embeddedServer(Netty, env.applicationPort) {
-        setupAuth(
-            environment = env,
-            jwkProvider = jwkProvider
-        )
+        setupAuth(environment = env, jwkProvider = jwkProvider)
         install(ContentNegotiation) {
             jackson {
                 registerKotlinModule()

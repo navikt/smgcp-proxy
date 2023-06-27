@@ -6,16 +6,16 @@ group = "no.nav.syfo"
 version = "1.0.0"
 
 val coroutinesVersion = "1.7.0"
-val jacksonVersion = "2.15.0"
+val jacksonVersion = "2.15.2"
 val kluentVersion = "1.72"
-val ktorVersion = "2.3.0"
+val ktorVersion = "2.3.1"
 val logbackVersion = "1.4.5"
-val logstashEncoderVersion = "7.3"
+val logstashEncoderVersion = "7.4"
 val prometheusVersion = "0.16.0"
-val smCommonVersion = "1.0.2"
+val smCommonVersion = "1.0.9"
 val mockkVersion = "1.13.2"
 val testContainerKafkaVersion = "1.17.6"
-val kotlinVersion = "1.8.20"
+val kotlinVersion = "1.8.22"
 val kotestVersion = "5.5.4"
 val javaxAnnotationApiVersion = "1.3.2"
 val jaxwsToolsVersion = "2.3.2"
@@ -25,12 +25,14 @@ val jaxbApiVersion = "2.4.0-b180830.0359"
 val javaxActivationVersion = "1.1.1"
 val commonsTextVersion = "1.10.0"
 val cxfVersion = "3.5.5"
+val ktfmtVersion = "0.44"
 
 
 plugins {
     id("io.mateo.cxf-codegen") version "1.0.2"
-    kotlin("jvm") version "1.8.21"
+    kotlin("jvm") version "1.8.22"
     id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("com.diffplug.spotless") version "6.19.0"
 }
 
 buildscript {
@@ -165,6 +167,13 @@ tasks {
             events("skipped", "failed")
             showStackTraces = true
             exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        }
+    }
+
+    spotless {
+        kotlin { ktfmt(ktfmtVersion).kotlinlangStyle() }
+        check {
+            dependsOn("spotlessApply")
         }
     }
 
