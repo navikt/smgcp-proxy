@@ -15,7 +15,7 @@ data class Environment(
             "SECURITY_TOKEN_SERVICE_URL",
             "http://security-token-service.default/rest/v1/sts/token"
         ),
-    val btsysURL: String = getEnvVar("BTSYS_URL", "http://btsys.default"),
+    val btsysURL: String = getEnvVar("BTSYS_URL", "http://btsys.team-rocket"),
     val emottakEndpointURL: String = getEnvVar("SUBSCRIPTION_ENDPOINT_URL")
 )
 
