@@ -7,9 +7,12 @@ updates:
     open-pull-requests-limit: 10
     ignore:
       - dependency-name: "org.glassfish.jaxb:jaxb-runtime"
-        update-types: ["version-update:semver-major"]
-      - dependency-name: "org.apache.kafka:kafka_2.12"
-        update-types: ["version-update:semver-major"]
+      - dependency-name: "com.sun.xml.ws:jaxws-tools"
+      - dependency-name: "com.sun.xml.bind:jaxb-impl"
+      - dependency-name: "jakarta.xml.ws:jakarta.xml.ws-api"
+      - dependency-name: "jakarta.annotation:jakarta.annotation-api"
+      - dependency-name: "org.apache.cxf:cxf-core"
+      - dependency-name: "io.mateo.cxf-codegen"
     groups:
       dependencies:
         patterns:
