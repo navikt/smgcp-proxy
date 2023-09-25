@@ -5,18 +5,18 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 group = "no.nav.syfo"
 version = "1.0.0"
 
-val coroutinesVersion = "1.7.0"
+val coroutinesVersion = "1.7.3"
 val jacksonVersion = "2.15.2"
-val kluentVersion = "1.72"
+val kluentVersion = "1.73"
 val ktorVersion = "2.3.4"
-val logbackVersion = "1.4.5"
+val logbackVersion = "1.4.11"
 val logstashEncoderVersion = "7.4"
 val prometheusVersion = "0.16.0"
-val smCommonVersion = "1.0.9"
-val mockkVersion = "1.13.2"
+val smCommonVersion = "2.0.0"
+val mockkVersion = "1.13.8"
 val testContainerKafkaVersion = "1.17.6"
-val kotlinVersion = "1.8.22"
-val kotestVersion = "5.5.4"
+val kotlinVersion = "1.9.10"
+val kotestVersion = "5.7.2"
 val javaxAnnotationApiVersion = "1.3.2"
 val jaxwsToolsVersion = "2.3.2"
 val jaxwsApiVersion = "2.3.1"
@@ -30,9 +30,9 @@ val ktfmtVersion = "0.44"
 
 plugins {
     id("io.mateo.cxf-codegen") version "1.0.2"
-    kotlin("jvm") version "1.8.22"
+    kotlin("jvm") version "1.9.10"
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("com.diffplug.spotless") version "6.19.0"
+    id("com.diffplug.spotless") version "6.21.0"
 }
 
 buildscript {
