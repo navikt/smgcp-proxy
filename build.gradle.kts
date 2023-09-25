@@ -5,34 +5,34 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 group = "no.nav.syfo"
 version = "1.0.0"
 
-val coroutinesVersion = "1.7.0"
+val coroutinesVersion = "1.7.3"
 val jacksonVersion = "2.15.2"
-val kluentVersion = "1.72"
+val kluentVersion = "1.73"
 val ktorVersion = "2.3.4"
-val logbackVersion = "1.4.5"
+val logbackVersion = "1.4.11"
 val logstashEncoderVersion = "7.4"
 val prometheusVersion = "0.16.0"
-val smCommonVersion = "1.0.9"
-val mockkVersion = "1.13.2"
+val smCommonVersion = "2.0.0"
+val mockkVersion = "1.13.8"
 val testContainerKafkaVersion = "1.17.6"
-val kotlinVersion = "1.8.22"
-val kotestVersion = "5.5.4"
+val kotlinVersion = "1.9.10"
+val kotestVersion = "5.7.2"
 val javaxAnnotationApiVersion = "1.3.2"
-val jaxwsToolsVersion = "2.3.2"
+val jaxwsToolsVersion = "4.0.1"
 val jaxwsApiVersion = "2.3.1"
 val jaxbRuntimeVersion = "2.4.0-b180830.0438"
 val jaxbApiVersion = "2.4.0-b180830.0359"
 val javaxActivationVersion = "1.1.1"
 val commonsTextVersion = "1.10.0"
-val cxfVersion = "3.5.5"
+val cxfVersion = "4.0.3"
 val ktfmtVersion = "0.44"
 
 
 plugins {
-    id("io.mateo.cxf-codegen") version "1.0.2"
-    kotlin("jvm") version "1.8.22"
+    id("io.mateo.cxf-codegen") version "2.0.0"
+    kotlin("jvm") version "1.9.10"
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("com.diffplug.spotless") version "6.19.0"
+    id("com.diffplug.spotless") version "6.21.0"
 }
 
 buildscript {
@@ -40,7 +40,7 @@ buildscript {
         classpath("javax.xml.bind:jaxb-api:2.4.0-b180830.0359")
         classpath("org.glassfish.jaxb:jaxb-runtime:2.4.0-b180830.0438")
         classpath("com.sun.activation:javax.activation:1.2.0")
-        classpath("com.sun.xml.ws:jaxws-tools:2.3.1") {
+        classpath("com.sun.xml.ws:jaxws-tools:4.0.1") {
             exclude(group = "com.sun.xml.ws", module = "policy")
             exclude(group = "org.apache.commons", module = "commons-text")
         }
@@ -65,9 +65,9 @@ dependencies {
         exclude(group = "com.sun.xml.ws", module = "policy")
         exclude(group = "org.apache.commons", module = "commons-text")
     }
-    cxfCodegen("com.sun.xml.bind:jaxb-impl:2.3.3")
-    cxfCodegen("jakarta.xml.ws:jakarta.xml.ws-api:2.3.3")
-    cxfCodegen("jakarta.annotation:jakarta.annotation-api:1.3.5")
+    cxfCodegen("com.sun.xml.bind:jaxb-impl:4.0.3")
+    cxfCodegen("jakarta.xml.ws:jakarta.xml.ws-api:4.0.0")
+    cxfCodegen("jakarta.annotation:jakarta.annotation-api:2.1.1")
     cxfCodegen("org.apache.commons:commons-text:$commonsTextVersion")
     cxfCodegen("org.apache.cxf:cxf-core:$cxfVersion")
 
