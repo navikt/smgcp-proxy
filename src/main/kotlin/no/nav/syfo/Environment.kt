@@ -10,12 +10,6 @@ data class Environment(
     val clientId: String = getEnvVar("AZURE_APP_CLIENT_ID"),
     val jwkKeysUrl: String = getEnvVar("AZURE_OPENID_CONFIG_JWKS_URI"),
     val jwtIssuer: String = getEnvVar("AZURE_OPENID_CONFIG_ISSUER"),
-    val securityTokenServiceURL: String =
-        getEnvVar(
-            "SECURITY_TOKEN_SERVICE_URL",
-            "http://security-token-service.default/rest/v1/sts/token"
-        ),
-    val btsysURL: String = getEnvVar("BTSYS_URL", "http://btsys.team-rocket"),
     val emottakEndpointURL: String = getEnvVar("SUBSCRIPTION_ENDPOINT_URL")
 )
 

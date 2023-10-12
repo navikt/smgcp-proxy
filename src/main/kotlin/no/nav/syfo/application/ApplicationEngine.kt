@@ -24,8 +24,6 @@ import no.nav.syfo.Environment
 import no.nav.syfo.application.api.registerNaisApi
 import no.nav.syfo.application.authentication.setupAuth
 import no.nav.syfo.application.metrics.monitorHttpRequests
-import no.nav.syfo.btsys.BtsysClient
-import no.nav.syfo.btsys.registerBtsysApi
 import no.nav.syfo.emottak.EmottakClient
 import no.nav.syfo.emottak.registerEmottakApi
 import no.nav.syfo.log
@@ -34,7 +32,6 @@ fun createApplicationEngine(
     env: Environment,
     applicationState: ApplicationState,
     jwkProvider: JwkProvider,
-    btsysClient: BtsysClient,
     emottakClient: EmottakClient
 ): ApplicationEngine =
     embeddedServer(Netty, env.applicationPort) {
@@ -62,10 +59,7 @@ fun createApplicationEngine(
 
         routing {
             registerNaisApi(applicationState)
-            authenticate("servicebruker") {
-                registerBtsysApi(btsysClient)
-                registerEmottakApi(emottakClient)
-            }
+            authenticate("servicebruker") { registerEmottakApi(emottakClient) }
         }
         intercept(ApplicationCallPipeline.Monitoring, monitorHttpRequests())
     }
