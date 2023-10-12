@@ -40,25 +40,13 @@ spec:
   accessPolicy:
     inbound:
       rules:
-        - application: syfosmregler
-          namespace: teamsykmelding
-          cluster: dev-gcp
-        - application: pale-2-regler
-          namespace: teamsykmelding
-          cluster: dev-gcp
         - application: syfosmmottak
           namespace: teamsykmelding
           cluster: dev-gcp
         - application: pale-2
           namespace: teamsykmelding
           cluster: dev-gcp
-        - application: syfosmpapirregler
-          namespace: teamsykmelding
-          cluster: dev-gcp
         - application: syfosmpapirmottak
-          namespace: teamsykmelding
-          cluster: dev-gcp
-        - application: smregistrering-backend
           namespace: teamsykmelding
           cluster: dev-gcp
         - application: padm2
