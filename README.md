@@ -1,16 +1,25 @@
 [![Build status](https://github.com/navikt/smgcp-proxy/workflows/Deploy%20to%20dev%20and%20prod/badge.svg)](https://github.com/navikt/smgcp-proxy/workflows/Deploy%20to%20dev%20and%20prod/badge.svg)
 # smgcp-proxy
-Proxy application for exposing internal services to GCP. 
+Proxy application for teamsykmelding for exposing internal services to GCP. 
 
 # Technologies used
 * Kotlin
 * Ktor
 * Gradle
-* Kotest
+* Junit
 * Jackson
 
 #### Requirements
 * JDK 17
+* 
+## Flowchart
+This is an overview of the flow in the application
+```mermaid
+  flowchart LR
+      smgcp-proxy <---> vault
+      smgcp-proxy <--> syfosmmottak
+      smgcp-proxy <--> eMottak;
+ ```
 
 ## Getting started
 ### Building the application
