@@ -13,10 +13,8 @@ val logbackVersion = "1.4.11"
 val logstashEncoderVersion = "7.4"
 val prometheusVersion = "0.16.0"
 val smCommonVersion = "2.0.4"
-val mockkVersion = "1.13.8"
 val testContainerKafkaVersion = "1.17.6"
 val kotlinVersion = "1.9.10"
-val kotestVersion = "5.7.2"
 val javaxAnnotationApiVersion = "1.3.2"
 val jaxwsToolsVersion = "2.3.2"
 val jaxwsApiVersion = "2.3.1"
@@ -26,13 +24,20 @@ val javaxActivationVersion = "1.1.1"
 val commonsTextVersion = "1.10.0"
 val cxfVersion = "3.5.5"
 val ktfmtVersion = "0.44"
+val junitJupiterVersion = "5.10.0"
 
 
 plugins {
+    id("application")
     id("io.mateo.cxf-codegen") version "1.0.2"
     kotlin("jvm") version "1.9.10"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("com.diffplug.spotless") version "6.22.0"
+}
+
+application {
+    mainClass.set("no.nav.syfo.BootstrapKt")
+
 }
 
 buildscript {
@@ -88,7 +93,9 @@ dependencies {
     implementation("io.ktor:ktor-serialization-jackson:$ktorVersion")
 
     implementation("no.nav.helse:syfosm-common-rest-sts:$smCommonVersion")
-    implementation("no.nav.helse:syfosm-common-ws:$smCommonVersion")
+    implementation("no.nav.helse:syfosm-common-ws:$smCommonVersion"){
+        exclude(group ="commons-collections", module = "commons-collections")
+    }
 
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
     implementation("net.logstash.logback:logstash-logback-encoder:$logstashEncoderVersion")
@@ -107,28 +114,15 @@ dependencies {
     }
     implementation("org.apache.commons:commons-text:$commonsTextVersion")
 
-    testImplementation("org.amshove.kluent:kluent:$kluentVersion") 
-    testImplementation("io.mockk:mockk:$mockkVersion")
     testImplementation("io.ktor:ktor-server-test-host:$ktorVersion") {
         exclude(group = "org.eclipse.jetty") 
     }
-    testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
-    testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
-    testImplementation("io.kotest:kotest-property:$kotestVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 
 tasks {
-
-    withType<Jar> {
-        manifest.attributes["Main-Class"] = "no.nav.syfo.BootstrapKt"
-    }
-
-    create("printVersion") {
-        doLast {
-            println(project.version)
-        }
-    }
 
     cxfCodegen {
         wsdl2java {
@@ -139,19 +133,29 @@ tasks {
         }
     }
 
-    withType<KotlinCompile> {
+    compileKotlin {
         dependsOn("wsdl2javaSubscription")
-        kotlinOptions.jvmTarget = "17"
     }
 
-    withType<ShadowJar> {
+
+    shadowJar {
         transform(ServiceFileTransformer::class.java) {
             setPath("META-INF/cxf")
             include("bus-extensions.txt")
         }
+        archiveBaseName.set("app")
+        archiveClassifier.set("")
+        isZip64 = true
+        manifest {
+            attributes(
+                mapOf(
+                    "Main-Class" to "no.nav.syfo.ApplicationKt",
+                ),
+            )
+        }
     }
 
-    withType<Test> {
+    test {
         useJUnitPlatform {}
         testLogging {
             events("skipped", "failed")
