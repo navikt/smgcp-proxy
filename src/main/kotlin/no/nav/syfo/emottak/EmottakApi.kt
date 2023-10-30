@@ -10,7 +10,7 @@ import no.nav.syfo.log
 
 fun Route.registerEmottakApi(emottakClient: EmottakClient) {
     post("/emottak/startsubscription") {
-        log.info("Mottatt proxy-request for emottak")
+
         val startSubscriptionRequest = call.receiveNullable<StartSubscriptionRequest>()
         val callId = call.request.headers["Nav-Call-Id"]
 
@@ -20,13 +20,22 @@ fun Route.registerEmottakApi(emottakClient: EmottakClient) {
             return@post
         }
 
+        if (callId == null) {
+            log.warn("Mangler Nav-Call-Id header")
+            call.respond(HttpStatusCode.BadRequest, "Mangler Nav-Call-Id")
+            return@post
+        }
+        log.info("Mottatt proxy-request for emottak start subscription for callId $callId")
+
         try {
             emottakClient.startSubscription(
                 tssIdent = startSubscriptionRequest.tssIdent,
                 sender = startSubscriptionRequest.sender,
                 partnerreferanse = startSubscriptionRequest.partnerreferanse
             )
-            call.respond(HttpStatusCode.OK)
+            call.respond(HttpStatusCode.OK).also {
+                log.info("Sender http OK status for callId $callId")
+            }
         } catch (e: Exception) {
             log.error("Noe gikk galt ved kall til emottak: ${e.message} for callId $callId")
             call.respond(

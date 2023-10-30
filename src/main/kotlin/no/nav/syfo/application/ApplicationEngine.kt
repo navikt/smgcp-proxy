@@ -52,8 +52,10 @@ fun createApplicationEngine(
         }
         install(StatusPages) {
             exception<Throwable> { call, cause ->
-                log.error("Caught exception", cause)
+                log.error("Caught exception ${cause.message}")
                 call.respond(HttpStatusCode.InternalServerError, cause.message ?: "Unknown error")
+                applicationState.alive = false
+                applicationState.ready = false
             }
         }
 
