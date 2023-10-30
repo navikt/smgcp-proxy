@@ -2,6 +2,9 @@ package no.nav.syfo
 
 import com.auth0.jwk.JwkProviderBuilder
 import io.prometheus.client.hotspot.DefaultExports
+import java.net.InetSocketAddress
+import java.net.ProxySelector
+import java.net.URI
 import java.net.URL
 import java.util.concurrent.TimeUnit
 import no.nav.emottak.subscription.SubscriptionPort
@@ -21,10 +24,17 @@ fun main() {
     val serviceUser = ServiceUser()
     DefaultExports.initialize()
 
+    val proxyUri = URI.create(System.getenv("HTTP_PROXY"))
+
     val jwkProvider =
         JwkProviderBuilder(URL(env.jwkKeysUrl))
             .cached(10, 24, TimeUnit.HOURS)
             .rateLimited(10, 1, TimeUnit.MINUTES)
+            .proxied(
+                ProxySelector.of(InetSocketAddress(proxyUri.host, proxyUri.port))
+                    .select(URI(env.jwkKeysUrl))
+                    .first()
+            )
             .build()
 
     val subscriptionEmottak =
