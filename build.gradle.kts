@@ -10,7 +10,7 @@ val ktorVersion = "2.3.5"
 val logbackVersion = "1.4.11"
 val logstashEncoderVersion = "7.4"
 val prometheusVersion = "0.16.0"
-val smCommonVersion = "2.0.5"
+val smCommonVersion = "2.1.0-jdk"
 val testContainerKafkaVersion = "1.17.6"
 val kotlinVersion = "1.9.20"
 val javaxAnnotationApiVersion = "1.3.2"
@@ -22,7 +22,7 @@ val javaxActivationVersion = "1.1.1"
 val commonsTextVersion = "1.11.0"
 val cxfVersion = "3.5.5"
 val ktfmtVersion = "0.44"
-val junitJupiterVersion = "5.10.0"
+val junitJupiterVersion = "5.10.1"
 
 
 plugins {
