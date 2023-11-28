@@ -7,12 +7,12 @@ val coroutinesVersion = "1.7.3"
 val jacksonVersion = "2.16.0"
 val kluentVersion = "1.73"
 val ktorVersion = "2.3.6"
-val logbackVersion = "1.4.11"
+val logbackVersion = "1.4.12"
 val logstashEncoderVersion = "7.4"
 val prometheusVersion = "0.16.0"
 val smCommonVersion = "2.0.6"
 val testContainerKafkaVersion = "1.17.6"
-val kotlinVersion = "1.9.20"
+val kotlinVersion = "1.9.21"
 val javaxAnnotationApiVersion = "1.3.2"
 val jaxwsToolsVersion = "2.3.2"
 val jaxwsApiVersion = "2.3.1"
@@ -28,9 +28,9 @@ val junitJupiterVersion = "5.10.1"
 plugins {
     id("application")
     id("io.mateo.cxf-codegen") version "1.0.2"
-    kotlin("jvm") version "1.9.20"
+    kotlin("jvm") version "1.9.21"
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("com.diffplug.spotless") version "6.22.0"
+    id("com.diffplug.spotless") version "6.23.0"
 }
 
 application {
