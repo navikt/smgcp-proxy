@@ -12,7 +12,7 @@ val logstashEncoderVersion = "7.4"
 val prometheusVersion = "0.16.0"
 val smCommonVersion = "2.0.8"
 val testContainerKafkaVersion = "1.17.6"
-val kotlinVersion = "1.9.21"
+val kotlinVersion = "1.9.22"
 val javaxAnnotationApiVersion = "1.3.2"
 val jaxwsToolsVersion = "2.3.2"
 val jaxwsApiVersion = "2.3.1"
@@ -28,7 +28,7 @@ val junitJupiterVersion = "5.10.1"
 plugins {
     id("application")
     id("io.mateo.cxf-codegen") version "1.0.2"
-    kotlin("jvm") version "1.9.21"
+    kotlin("jvm") version "1.9.22"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("com.diffplug.spotless") version "6.23.3"
 }
