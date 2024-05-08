@@ -11,7 +11,7 @@ Proxy application for teamsykmelding for exposing internal services to GCP.
 
 #### Requirements
 * JDK 17
-* 
+
 ## Flowchart
 This is an overview of the flow in the application
 ```mermaid
