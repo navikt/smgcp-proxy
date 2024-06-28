@@ -22,7 +22,7 @@ val javaxActivationVersion = "1.1.1"
 val commonsTextVersion = "1.12.0"
 val cxfVersion = "3.5.5"
 val ktfmtVersion = "0.44"
-val junitJupiterVersion = "5.10.2"
+val junitJupiterVersion = "5.10.3"
 
 
 plugins {
