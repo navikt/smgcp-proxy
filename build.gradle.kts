@@ -10,7 +10,6 @@ val ktorVersion = "2.3.12"
 val logbackVersion = "1.5.6"
 val logstashEncoderVersion = "8.0"
 val prometheusVersion = "0.16.0"
-val smCommonVersion = "2.0.8"
 val testContainerKafkaVersion = "1.17.6"
 val kotlinVersion = "2.0.10"
 val javaxAnnotationApiVersion = "1.3.2"
@@ -23,6 +22,8 @@ val commonsTextVersion = "1.12.0"
 val cxfVersion = "3.5.5"
 val ktfmtVersion = "0.44"
 val junitJupiterVersion = "5.10.3"
+val commonsCollectionsVersion = "3.2.2"
+val bcprovJdk15onVersion = "1.70"
 
 
 plugins {
@@ -80,6 +81,19 @@ dependencies {
     implementation("io.prometheus:simpleclient_hotspot:$prometheusVersion")
     implementation("io.prometheus:simpleclient_common:$prometheusVersion")
 
+    implementation("org.apache.cxf:cxf-rt-frontend-jaxws:$cxfVersion")
+    implementation("org.apache.cxf:cxf-rt-features-logging:$cxfVersion")
+    implementation("org.apache.cxf:cxf-rt-transports-http:$cxfVersion")
+    implementation("org.apache.cxf:cxf-rt-ws-security:$cxfVersion") {
+        exclude(group = "org.apache.velocity", module = "velocity")
+    }
+    implementation("commons-collections:commons-collections:$commonsCollectionsVersion")
+    implementation("org.bouncycastle:bcprov-jdk15on:$bcprovJdk15onVersion")
+
+    implementation("io.ktor:ktor-client-auth:$ktorVersion")
+    implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+    implementation("io.ktor:ktor-client-apache:$ktorVersion")
+
     implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-server-netty:$ktorVersion")
     implementation("io.ktor:ktor-server-auth:$ktorVersion")
@@ -90,10 +104,6 @@ dependencies {
     implementation("io.ktor:ktor-server-status-pages:$ktorVersion")
     implementation("io.ktor:ktor-serialization-jackson:$ktorVersion")
 
-    implementation("no.nav.helse:syfosm-common-rest-sts:$smCommonVersion")
-    implementation("no.nav.helse:syfosm-common-ws:$smCommonVersion"){
-        exclude(group ="commons-collections", module = "commons-collections")
-    }
 
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
     implementation("net.logstash.logback:logstash-logback-encoder:$logstashEncoderVersion")

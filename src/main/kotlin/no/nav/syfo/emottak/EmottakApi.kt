@@ -10,7 +10,6 @@ import no.nav.syfo.log
 
 fun Route.registerEmottakApi(emottakClient: EmottakClient) {
     post("/emottak/startsubscription") {
-
         val startSubscriptionRequest = call.receiveNullable<StartSubscriptionRequest>()
         val callId = call.request.headers["Nav-Call-Id"]
 
