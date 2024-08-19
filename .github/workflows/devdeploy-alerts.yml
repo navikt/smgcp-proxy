@@ -9,6 +9,9 @@ on:
       - alerts-fss-dev.yaml
 jobs:
   deploy_dev:
+    permissions:
+      contents: "write"
+      id-token: "write"
     name: Deploy alert til dev
     runs-on: ubuntu-latest
     steps:
