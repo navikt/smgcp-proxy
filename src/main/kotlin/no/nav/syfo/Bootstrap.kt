@@ -5,7 +5,7 @@ import io.prometheus.client.hotspot.DefaultExports
 import java.net.InetSocketAddress
 import java.net.ProxySelector
 import java.net.URI
-import java.net.URL
+import java.time.Duration
 import java.util.concurrent.TimeUnit
 import no.nav.emottak.subscription.SubscriptionPort
 import no.nav.syfo.application.ApplicationServer
@@ -27,8 +27,8 @@ fun main() {
     val proxyUri = URI.create(System.getenv("HTTP_PROXY"))
 
     val jwkProvider =
-        JwkProviderBuilder(URL(env.jwkKeysUrl))
-            .cached(10, 24, TimeUnit.HOURS)
+        JwkProviderBuilder(URI.create(env.jwkKeysUrl).toURL())
+            .cached(10, Duration.ofHours(24))
             .rateLimited(10, 1, TimeUnit.MINUTES)
             .proxied(
                 ProxySelector.of(InetSocketAddress(proxyUri.host, proxyUri.port))
