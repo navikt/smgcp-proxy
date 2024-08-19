@@ -1,0 +1,22 @@
+name: Deploy to dev
+on:
+  push:
+    branches:
+      - '*'
+      - '!main'
+    paths:
+      - .github/workflows/devdeploy-alerts.yml
+      - alerts-fss-dev.yaml
+jobs:
+  deploy_dev:
+    name: Deploy alert til dev
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Deploy to dev
+        uses: nais/deploy/actions/deploy@master
+        env:
+          APIKEY: ${{ secrets.NAIS_TEAMSYKMELDING_DEPLOY_KEY }}
+          CLUSTER: dev-fss
+          RESOURCE: alerts-fss-dev.yaml
