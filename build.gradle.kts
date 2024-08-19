@@ -30,7 +30,7 @@ plugins {
     id("application")
     id("io.mateo.cxf-codegen") version "1.0.2"
     kotlin("jvm") version "2.0.10"
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("com.gradleup.shadow") version "8.3.0"
     id("com.diffplug.spotless") version "6.25.0"
 }
 
@@ -87,8 +87,6 @@ dependencies {
     implementation("org.apache.cxf:cxf-rt-ws-security:$cxfVersion") {
         exclude(group = "org.apache.velocity", module = "velocity")
     }
-    implementation("commons-collections:commons-collections:$commonsCollectionsVersion")
-    implementation("org.bouncycastle:bcprov-jdk15on:$bcprovJdk15onVersion")
 
     implementation("io.ktor:ktor-client-auth:$ktorVersion")
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
