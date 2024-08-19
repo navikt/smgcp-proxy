@@ -4,6 +4,7 @@ metadata:
   name: sykmeldingalerts
   namespace: teamsykmelding
   labels:
+    team: teamsykmelding
     alertmanagerConfig: sykmeldingalertsslackdev
 spec:
   receivers:
