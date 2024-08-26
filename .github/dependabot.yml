@@ -13,6 +13,10 @@ updates:
       - dependency-name: "jakarta.annotation:jakarta.annotation-api"
       - dependency-name: "org.apache.cxf:cxf-core"
       - dependency-name: "io.mateo.cxf-codegen"
+      - dependency-name: "org.apache.cxf:cxf-rt-frontend-jaxws"
+      - dependency-name: "org.apache.cxf:cxf-rt-features-logging"
+      - dependency-name: "org.apache.cxf:cxf-rt-transports-http"
+      - dependency-name: "org.apache.cxf:cxf-rt-ws-security"
     groups:
       dependencies:
         patterns:
