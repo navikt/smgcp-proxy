@@ -21,7 +21,7 @@ val javaxActivationVersion = "1.1.1"
 val commonsTextVersion = "1.12.0"
 val cxfVersion = "3.5.5"
 val ktfmtVersion = "0.44"
-val junitJupiterVersion = "5.11.0"
+val junitJupiterVersion = "5.11.1"
 val commonsCollectionsVersion = "3.2.2"
 val bcprovJdk15onVersion = "1.70"
 
