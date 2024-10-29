@@ -4,7 +4,7 @@ group = "no.nav.syfo"
 version = "1.0.0"
 
 val coroutinesVersion = "1.9.0"
-val jacksonVersion = "2.18.0"
+val jacksonVersion = "2.18.1"
 val kluentVersion = "1.73"
 val ktorVersion = "3.0.0"
 val logbackVersion = "1.5.12"
@@ -30,7 +30,7 @@ plugins {
     id("application")
     id("io.mateo.cxf-codegen") version "1.0.2"
     kotlin("jvm") version "2.0.21"
-    id("com.gradleup.shadow") version "8.3.3"
+    id("com.gradleup.shadow") version "8.3.4"
     id("com.diffplug.spotless") version "6.25.0"
 }
 
