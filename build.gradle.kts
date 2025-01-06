@@ -3,11 +3,11 @@ import com.github.jengelman.gradle.plugins.shadow.transformers.ServiceFileTransf
 group = "no.nav.syfo"
 version = "1.0.0"
 
-val coroutinesVersion = "1.10.0"
+val coroutinesVersion = "1.10.1"
 val jacksonVersion = "2.18.2"
 val kluentVersion = "1.73"
 val ktorVersion = "3.0.3"
-val logbackVersion = "1.5.14"
+val logbackVersion = "1.5.16"
 val logstashEncoderVersion = "8.0"
 val prometheusVersion = "0.16.0"
 val testContainerKafkaVersion = "1.17.6"
