@@ -11,7 +11,7 @@ val logbackVersion = "1.5.16"
 val logstashEncoderVersion = "8.0"
 val prometheusVersion = "0.16.0"
 val testContainerKafkaVersion = "1.17.6"
-val kotlinVersion = "2.1.0"
+val kotlinVersion = "2.1.10"
 val javaxAnnotationApiVersion = "1.3.2"
 val jaxwsToolsVersion = "2.3.2"
 val jaxwsApiVersion = "2.3.1"
@@ -29,8 +29,8 @@ val bcprovJdk15onVersion = "1.70"
 plugins {
     id("application")
     id("io.mateo.cxf-codegen") version "1.0.2"
-    kotlin("jvm") version "2.1.0"
-    id("com.gradleup.shadow") version "8.3.5"
+    kotlin("jvm") version "2.1.10"
+    id("com.gradleup.shadow") version "8.3.6"
     id("com.diffplug.spotless") version "7.0.2"
 }
 
