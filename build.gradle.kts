@@ -5,12 +5,10 @@ version = "1.0.0"
 
 val coroutinesVersion = "1.10.2"
 val jacksonVersion = "2.19.1"
-val kluentVersion = "1.73"
 val ktorVersion = "3.2.1"
 val logbackVersion = "1.5.18"
 val logstashEncoderVersion = "8.1"
 val prometheusVersion = "0.16.0"
-val testContainerKafkaVersion = "1.17.6"
 val kotlinVersion = "2.2.0"
 val javaxAnnotationApiVersion = "1.3.2"
 val jaxwsToolsVersion = "2.3.2"
@@ -19,11 +17,9 @@ val jaxbRuntimeVersion = "2.4.0-b180830.0438"
 val jaxbApiVersion = "2.4.0-b180830.0359"
 val javaxActivationVersion = "1.1.1"
 val commonsTextVersion = "1.13.1"
-val cxfVersion = "3.5.5"
+val cxfVersion = "3.5.8"
 val ktfmtVersion = "0.44"
 val junitJupiterVersion = "5.13.3"
-val commonsCollectionsVersion = "3.2.2"
-val bcprovJdk15onVersion = "1.70"
 
 
 plugins {
@@ -121,7 +117,7 @@ dependencies {
     implementation("org.apache.commons:commons-text:$commonsTextVersion")
 
     testImplementation("io.ktor:ktor-server-test-host:$ktorVersion") {
-        exclude(group = "org.eclipse.jetty") 
+        exclude(group = "org.eclipse.jetty")
     }
     testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
