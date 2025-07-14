@@ -5,7 +5,7 @@ version = "1.0.0"
 
 val coroutinesVersion = "1.10.2"
 val jacksonVersion = "2.19.1"
-val ktorVersion = "3.2.1"
+val ktorVersion = "3.2.2"
 val logbackVersion = "1.5.18"
 val logstashEncoderVersion = "8.1"
 val prometheusVersion = "0.16.0"
@@ -27,7 +27,7 @@ plugins {
     id("io.mateo.cxf-codegen") version "1.0.2"
     kotlin("jvm") version "2.2.0"
     id("com.gradleup.shadow") version "8.3.8"
-    id("com.diffplug.spotless") version "7.0.4"
+    id("com.diffplug.spotless") version "7.1.0"
 }
 
 application {
