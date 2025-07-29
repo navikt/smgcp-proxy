@@ -13,6 +13,8 @@ import no.nav.syfo.application.ApplicationState
 import no.nav.syfo.application.createApplicationEngine
 import no.nav.syfo.emottak.EmottakClient
 import no.nav.syfo.ws.createPort
+import org.apache.cxf.common.logging.LogUtils
+import org.apache.cxf.common.logging.Slf4jLogger
 import org.apache.cxf.ws.addressing.WSAddressingFeature
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -25,7 +27,7 @@ fun main() {
     DefaultExports.initialize()
 
     val proxyUri = URI.create(System.getenv("HTTP_PROXY"))
-
+    LogUtils.setLoggerClass(Slf4jLogger::class.java)
     val jwkProvider =
         JwkProviderBuilder(URI.create(env.jwkKeysUrl).toURL())
             .cached(10, Duration.ofHours(24))
