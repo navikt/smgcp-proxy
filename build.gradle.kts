@@ -151,5 +151,4 @@ tasks {
             dependsOn("spotlessApply")
         }
     }
-
 }
