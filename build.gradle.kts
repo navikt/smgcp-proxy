@@ -1,5 +1,3 @@
-import com.github.jengelman.gradle.plugins.shadow.transformers.ServiceFileTransformer
-
 group = "no.nav.syfo"
 version = "1.0.0"
 
@@ -26,7 +24,6 @@ plugins {
     id("application")
     id("io.mateo.cxf-codegen") version "1.0.2"
     kotlin("jvm") version "2.2.0"
-    id("com.gradleup.shadow") version "8.3.8"
     id("com.diffplug.spotless") version "7.1.0"
 }
 
@@ -137,24 +134,6 @@ tasks {
 
     compileKotlin {
         dependsOn("wsdl2javaSubscription")
-    }
-
-
-    shadowJar {
-        transform(ServiceFileTransformer::class.java) {
-            setPath("META-INF/cxf")
-            include("bus-extensions.txt")
-        }
-        archiveBaseName.set("app")
-        archiveClassifier.set("")
-        isZip64 = true
-        manifest {
-            attributes(
-                mapOf(
-                    "Main-Class" to "no.nav.syfo.ApplicationKt",
-                ),
-            )
-        }
     }
 
     test {
