@@ -1,4 +1,5 @@
-[![Build status](https://github.com/navikt/smgcp-proxy/workflows/Deploy%20to%20dev%20and%20prod/badge.svg)](https://github.com/navikt/smgcp-proxy/workflows/Deploy%20to%20dev%20and%20prod/badge.svg)
+[![Deploy app to dev and prod](https://github.com/navikt/smgcp-proxy/actions/workflows/deploy.yml/badge.svg)](https://github.com/navikt/smgcp-proxy/actions/workflows/deploy.yml)
+
 # smgcp-proxy
 Proxy application for teamsykmelding for exposing internal services to GCP. 
 
