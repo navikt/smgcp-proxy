@@ -2,29 +2,29 @@ group = "no.nav.syfo"
 version = "1.0.0"
 
 val coroutinesVersion = "1.10.2"
-val jacksonVersion = "2.19.1"
-val ktorVersion = "3.2.2"
+val jacksonVersion = "2.20.0"
+val ktorVersion = "3.3.0"
 val logbackVersion = "1.5.18"
 val logstashEncoderVersion = "8.1"
 val prometheusVersion = "0.16.0"
-val kotlinVersion = "2.2.0"
+val kotlinVersion = "2.2.20"
 val javaxAnnotationApiVersion = "1.3.2"
 val jaxwsToolsVersion = "2.3.2"
 val jaxwsApiVersion = "2.3.1"
 val jaxbRuntimeVersion = "2.4.0-b180830.0438"
 val jaxbApiVersion = "2.4.0-b180830.0359"
 val javaxActivationVersion = "1.1.1"
-val commonsTextVersion = "1.13.1"
+val commonsTextVersion = "1.14.0"
 val cxfVersion = "3.5.8"
 val ktfmtVersion = "0.44"
-val junitJupiterVersion = "5.13.3"
+val junitJupiterVersion = "5.13.4"
 
 
 plugins {
     id("application")
     id("io.mateo.cxf-codegen") version "1.0.2"
-    kotlin("jvm") version "2.2.0"
-    id("com.diffplug.spotless") version "7.1.0"
+    kotlin("jvm") version "2.2.20"
+    id("com.diffplug.spotless") version "7.2.1"
 }
 
 application {
