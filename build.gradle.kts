@@ -17,14 +17,14 @@ val javaxActivationVersion = "1.1.1"
 val commonsTextVersion = "1.14.0"
 val cxfVersion = "3.5.8"
 val ktfmtVersion = "0.44"
-val junitJupiterVersion = "5.13.4"
+val junitJupiterVersion = "6.0.0"
 
 
 plugins {
     id("application")
     id("io.mateo.cxf-codegen") version "1.0.2"
     kotlin("jvm") version "2.2.20"
-    id("com.diffplug.spotless") version "7.2.1"
+    id("com.diffplug.spotless") version "8.0.0"
 }
 
 application {
