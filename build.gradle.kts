@@ -2,9 +2,9 @@ group = "no.nav.syfo"
 version = "1.0.0"
 
 val coroutinesVersion = "1.10.2"
-val jacksonVersion = "2.20.0"
-val ktorVersion = "3.3.1"
-val logbackVersion = "1.5.20"
+val jacksonVersion = "2.20.1"
+val ktorVersion = "3.3.2"
+val logbackVersion = "1.5.21"
 val logstashEncoderVersion = "9.0"
 val prometheusVersion = "0.16.0"
 val kotlinVersion = "2.2.21"
@@ -17,7 +17,7 @@ val javaxActivationVersion = "1.1.1"
 val commonsTextVersion = "1.14.0"
 val cxfVersion = "3.5.8"
 val ktfmtVersion = "0.44"
-val junitJupiterVersion = "6.0.0"
+val junitJupiterVersion = "6.0.1"
 
 
 plugins {
