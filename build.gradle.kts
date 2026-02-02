@@ -2,8 +2,8 @@ group = "no.nav.syfo"
 version = "1.0.0"
 
 val coroutinesVersion = "1.10.2"
-val jacksonVersion = "2.20.1"
-val ktorVersion = "3.3.2"
+val jacksonVersion = "2.20.2"
+val ktorVersion = "3.4.0"
 val logbackVersion = "1.5.21"
 val logstashEncoderVersion = "9.0"
 val prometheusVersion = "0.16.0"
@@ -84,7 +84,6 @@ dependencies {
     implementation("io.ktor:ktor-client-auth:$ktorVersion")
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
     implementation("io.ktor:ktor-client-apache:$ktorVersion")
-
     implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-server-netty:$ktorVersion")
     implementation("io.ktor:ktor-server-auth:$ktorVersion")
