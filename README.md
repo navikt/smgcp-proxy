@@ -1,17 +1,17 @@
 [![Deploy app to dev and prod](https://github.com/navikt/smgcp-proxy/actions/workflows/deploy.yml/badge.svg)](https://github.com/navikt/smgcp-proxy/actions/workflows/deploy.yml)
 
 # smgcp-proxy
-Proxy application for teamsykmelding for exposing internal services to GCP. 
+Proxy application for teamsykmelding for exposing internal services to GCP.
 
 # Technologies used
-* Kotlin
-* Ktor
-* Gradle
-* Junit
-* Jackson
+* Rust
+* Axum
+* Tokio
+* Prometheus
+* Docker (distroless runtime image)
 
 #### Requirements
-* JDK 21
+* Rust (stable toolchain)
 
 ## Flowchart
 This is an overview of the flow in the application
@@ -24,19 +24,14 @@ This is an overview of the flow in the application
 
 ## Getting started
 ### Building the application
-#### Compile and package application
-To build locally and run the integration tests you can simply run
+#### Compile and run locally
 ``` bash
-./gradlew installDist
+cargo build --release
 ```
-or on windows
-`gradlew.bat installDist`
 
-### Upgrading the gradle wrapper
-Find the newest version of gradle here: https://gradle.org/releases/ Then run this command:
-
+Run tests:
 ``` bash
-./gradlew wrapper --gradle-version $gradleVersjon
+cargo test
 ```
 
 ### Contact

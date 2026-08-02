@@ -9,10 +9,42 @@ permissions:
   id-token: write
 
 jobs:
-  jar-app:
-    uses: navikt/teamsykmelding-github-actions-workflows/.github/workflows/installdist-gradle-21.yaml@main
-    secrets: inherit
-    with:
-      team: teamsykmelding
-      app: smgcp-proxy
-      cluster: fss
+  build-and-push:
+    name: Build and push Docker image
+    runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.docker-build-push.outputs.image }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up NAIS docker build and push
+        uses: nais/docker-build-push@v0
+        id: docker-build-push
+        with:
+          team: teamsykmelding
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+
+  deploy-dev:
+    name: Deploy to dev
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: nais/deploy/actions/deploy@v2
+        env:
+          CLUSTER: dev-fss
+          RESOURCE: .nais/naiserator-dev.yaml
+          VAR: image=${{ needs.build-and-push.outputs.image }}
+
+  deploy-prod:
+    name: Deploy to prod
+    needs: [build-and-push, deploy-dev]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: nais/deploy/actions/deploy@v2
+        env:
+          CLUSTER: prod-fss
+          RESOURCE: .nais/naiserator-prod.yaml
+          VAR: image=${{ needs.build-and-push.outputs.image }}

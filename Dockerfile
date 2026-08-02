@@ -1,8 +1,13 @@
-FROM gcr.io/distroless/java25-debian13@sha256:8ce26d023018ca2f11bf2530cd3a10a7fd8456c3142b5f9a7d6b135a1411c86a
+FROM rust:1-slim-bookworm AS builder
+WORKDIR /build
+COPY Cargo.toml Cargo.lock ./
+COPY src ./src
+RUN cargo build --release --locked
+
+FROM gcr.io/distroless/cc-debian12
 WORKDIR /app
-COPY build/install/*/lib /lib
-ENV JAVA_OPTS="-Dlogback.configurationFile=logback.xml"
+COPY --from=builder /build/target/release/smgcp-proxy /app/smgcp-proxy
 ENV TZ="Europe/Oslo"
 EXPOSE 8080
 USER nonroot
-ENTRYPOINT ["java", "-cp", "/lib/*", "no.nav.syfo.BootstrapKt"]
+ENTRYPOINT ["/app/smgcp-proxy"]
