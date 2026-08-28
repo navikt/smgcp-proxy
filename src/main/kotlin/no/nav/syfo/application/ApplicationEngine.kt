@@ -1,13 +1,9 @@
 package no.nav.syfo.application
 
 import com.auth0.jwk.JwkProvider
-import com.fasterxml.jackson.databind.DeserializationFeature
-import com.fasterxml.jackson.databind.SerializationFeature
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
-import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
-import io.ktor.serialization.jackson.jackson
+import io.ktor.serialization.jackson3.jackson
 import io.ktor.server.application.ApplicationCallPipeline
 import io.ktor.server.application.install
 import io.ktor.server.auth.authenticate
@@ -26,6 +22,7 @@ import no.nav.syfo.application.metrics.monitorHttpRequests
 import no.nav.syfo.emottak.EmottakClient
 import no.nav.syfo.emottak.registerEmottakApi
 import no.nav.syfo.log
+import tools.jackson.databind.DeserializationFeature
 
 fun createApplicationEngine(
     env: Environment,
@@ -36,12 +33,7 @@ fun createApplicationEngine(
     embeddedServer(Netty, env.applicationPort) {
         setupAuth(environment = env, jwkProvider = jwkProvider)
         install(ContentNegotiation) {
-            jackson {
-                registerKotlinModule()
-                registerModule(JavaTimeModule())
-                configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-                configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-            }
+            jackson { configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false) }
         }
 
         install(CallId) {

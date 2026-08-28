@@ -11,7 +11,7 @@ Proxy application for teamsykmelding for exposing internal services to GCP.
 * Jackson
 
 #### Requirements
-* JDK 21
+* JDK 25
 
 ## Flowchart
 This is an overview of the flow in the application
