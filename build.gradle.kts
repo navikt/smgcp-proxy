@@ -2,12 +2,12 @@ group = "no.nav.syfo"
 version = "1.0.0"
 
 val coroutinesVersion = "1.10.2"
-val jacksonVersion = "2.20.2"
-val ktorVersion = "3.4.0"
-val logbackVersion = "1.5.21"
+val jacksonVersion = "3.2.2"
+val ktorVersion = "3.5.2"
+val logbackVersion = "1.6.3"
 val logstashEncoderVersion = "9.0"
 val prometheusVersion = "0.16.0"
-val kotlinVersion = "2.2.21"
+val kotlinVersion = "2.4.10"
 val javaxAnnotationApiVersion = "1.3.2"
 val jaxwsToolsVersion = "2.3.2"
 val jaxwsApiVersion = "2.3.1"
@@ -23,7 +23,7 @@ val junitJupiterVersion = "6.0.1"
 plugins {
     id("application")
     id("io.mateo.cxf-codegen") version "1.0.2"
-    kotlin("jvm") version "2.2.21"
+    kotlin("jvm") version "2.4.10"
     id("com.diffplug.spotless") version "8.1.0"
 }
 
@@ -92,14 +92,13 @@ dependencies {
     implementation("io.ktor:ktor-server-cors:$ktorVersion")
     implementation("io.ktor:ktor-server-call-id:$ktorVersion")
     implementation("io.ktor:ktor-server-status-pages:$ktorVersion")
-    implementation("io.ktor:ktor-serialization-jackson:$ktorVersion")
+    implementation("io.ktor:ktor-serialization-jackson3:$ktorVersion")
 
 
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
     implementation("net.logstash.logback:logstash-logback-encoder:$logstashEncoderVersion")
 
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
+    implementation("tools.jackson.module:jackson-module-kotlin:$jacksonVersion")
 
     implementation("javax.xml.ws:jaxws-api:$jaxwsApiVersion")
     implementation("javax.annotation:javax.annotation-api:$javaxAnnotationApiVersion")
