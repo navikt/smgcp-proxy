@@ -28,7 +28,7 @@ fun createApplicationEngine(
     env: Environment,
     applicationState: ApplicationState,
     jwkProvider: JwkProvider,
-    emottakClient: EmottakClient
+    emottakClient: EmottakClient,
 ): EmbeddedServer<NettyApplicationEngine, NettyApplicationEngine.Configuration> =
     embeddedServer(Netty, env.applicationPort) {
         setupAuth(environment = env, jwkProvider = jwkProvider)

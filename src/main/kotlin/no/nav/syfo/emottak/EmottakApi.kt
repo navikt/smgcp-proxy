@@ -30,7 +30,7 @@ fun Route.registerEmottakApi(emottakClient: EmottakClient) {
             emottakClient.startSubscription(
                 tssIdent = startSubscriptionRequest.tssIdent,
                 sender = startSubscriptionRequest.sender,
-                partnerreferanse = startSubscriptionRequest.partnerreferanse
+                partnerreferanse = startSubscriptionRequest.partnerreferanse,
             )
             call.respond(HttpStatusCode.OK).also {
                 log.info("Sender http OK status for callId $callId")
@@ -39,7 +39,7 @@ fun Route.registerEmottakApi(emottakClient: EmottakClient) {
             log.error("Noe gikk galt ved kall til emottak: ${e.message} for callId $callId")
             call.respond(
                 HttpStatusCode.InternalServerError,
-                e.message ?: "Noe gikk galt ved proxykall til emottak"
+                e.message ?: "Noe gikk galt ved proxykall til emottak",
             )
         }
     }

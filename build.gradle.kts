@@ -1,30 +1,35 @@
+import io.mateo.cxf.codegen.wsdl2java.Wsdl2Java
+
 group = "no.nav.syfo"
 version = "1.0.0"
 
-val coroutinesVersion = "1.10.2"
+val coroutinesVersion = "1.11.0"
 val jacksonVersion = "3.2.2"
 val ktorVersion = "3.5.2"
 val logbackVersion = "1.6.3"
 val logstashEncoderVersion = "9.0"
 val prometheusVersion = "0.16.0"
-val kotlinVersion = "2.4.10"
 val javaxAnnotationApiVersion = "1.3.2"
 val jaxwsToolsVersion = "2.3.2"
 val jaxwsApiVersion = "2.3.1"
 val jaxbRuntimeVersion = "2.4.0-b180830.0438"
 val jaxbApiVersion = "2.4.0-b180830.0359"
 val javaxActivationVersion = "1.1.1"
-val commonsTextVersion = "1.14.0"
-val cxfVersion = "3.5.8"
-val ktfmtVersion = "0.44"
-val junitJupiterVersion = "6.0.1"
+val commonsTextVersion = "1.15.0"
+val cxfVersion = "4.0.6"
+val ktfmtVersion = "0.56"
+val junitJupiterVersion = "6.1.3"
+
+///Due to vulnerabilities
+val bcprovJdk18onVersion = "1.85.2"
+val guavaVersion = "33.7.1-jre"
 
 
 plugins {
     id("application")
-    id("io.mateo.cxf-codegen") version "1.0.2"
+    id("io.mateo.cxf-codegen") version "2.4.1"
     kotlin("jvm") version "2.4.10"
-    id("com.diffplug.spotless") version "8.1.0"
+    id("com.diffplug.spotless") version "8.10.1"
 }
 
 application {
@@ -49,6 +54,9 @@ repositories {
     maven {
         url = uri("https://github-package-registry-mirror.gc.nav.no/cached/maven-release")
     }
+    maven {
+        url = uri("https://build.shibboleth.net/maven/releases")
+    }
 }
 
 
@@ -68,7 +76,6 @@ dependencies {
     cxfCodegen("org.apache.commons:commons-text:$commonsTextVersion")
     cxfCodegen("org.apache.cxf:cxf-core:$cxfVersion")
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$coroutinesVersion")
     implementation("io.prometheus:simpleclient_hotspot:$prometheusVersion")
@@ -80,10 +87,20 @@ dependencies {
     implementation("org.apache.cxf:cxf-rt-ws-security:$cxfVersion") {
         exclude(group = "org.apache.velocity", module = "velocity")
     }
+    constraints {
+        implementation("org.bouncycastle:bcprov-jdk18on:$bcprovJdk18onVersion") {
+            because("override transient from org.apache.cxf:cxf-rt-ws-security")
+        }
+    }
+    constraints {
+        implementation("com.google.guava:guava:$guavaVersion") {
+            because("override transient from org.apache.cxf:cxf-rt-ws-security")
+        }
+    }
 
     implementation("io.ktor:ktor-client-auth:$ktorVersion")
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-    implementation("io.ktor:ktor-client-apache:$ktorVersion")
+    implementation("io.ktor:ktor-client-apache5:$ktorVersion")
     implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-server-netty:$ktorVersion")
     implementation("io.ktor:ktor-server-auth:$ktorVersion")
@@ -111,9 +128,7 @@ dependencies {
     }
     implementation("org.apache.commons:commons-text:$commonsTextVersion")
 
-    testImplementation("io.ktor:ktor-server-test-host:$ktorVersion") {
-        exclude(group = "org.eclipse.jetty")
-    }
+    testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
     testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
@@ -122,12 +137,13 @@ dependencies {
 tasks {
 
     cxfCodegen {
-        wsdl2java {
-            register("subscription") {
-                wsdl.set(file("$projectDir/src/main/resources/wsdl/subscription.wsdl"))
-                bindingFiles.add("$projectDir/src/main/resources/xjb/binding.xml")
+        register("wsdl2javaSubscription", Wsdl2Java::class) {
+            toolOptions {
+                wsdl.set(layout.projectDirectory.file("src/main/resources/wsdl/subscription.wsdl").asFile.toPath().toAbsolutePath().toString())
+                bindingFiles.add(layout.projectDirectory.file("src/main/resources/xjb/binding.xml").asFile.absolutePath)
             }
         }
+
     }
 
     compileKotlin {
