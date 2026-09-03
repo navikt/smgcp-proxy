@@ -1,5 +1,13 @@
-<jaxb:bindings version="2.1" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb">
-    <jaxb:bindings>
-        <jaxb:globalBindings generateElementProperty="false" />
-    </jaxb:bindings>
-</jaxb:bindings>
+<jaxws:bindings version="1.0"
+                xmlns="https://jakarta.ee/xml/ns/jaxws"
+                xmlns:jaxws="https://jakarta.ee/xml/ns/jaxws"
+                xmlns:jxb="https://jakarta.ee/xml/ns/jaxb"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                wsdlLocation="../wsdl/subscription.wsdl">
+
+    <jaxws:bindings node="wsdl:definitions/wsdl:types/xs:schema">
+        <jxb:globalBindings generateElementProperty="false">
+        </jxb:globalBindings>
+    </jaxws:bindings>
+</jaxws:bindings>
