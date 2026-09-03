@@ -10,17 +10,18 @@ data class Environment(
     val clientId: String = getEnvVar("AZURE_APP_CLIENT_ID"),
     val jwkKeysUrl: String = getEnvVar("AZURE_OPENID_CONFIG_JWKS_URI"),
     val jwtIssuer: String = getEnvVar("AZURE_OPENID_CONFIG_ISSUER"),
-    val emottakEndpointURL: String = getEnvVar("SUBSCRIPTION_ENDPOINT_URL")
+    val emottakEndpointURL: String = getEnvVar("SUBSCRIPTION_ENDPOINT_URL"),
 )
 
 data class ServiceUser(
     val username: String = getFileAsString("/secrets/serviceuser/username"),
-    val password: String = getFileAsString("/secrets/serviceuser/password")
+    val password: String = getFileAsString("/secrets/serviceuser/password"),
 )
 
 fun getEnvVar(varName: String, defaultValue: String? = null) =
     System.getenv(varName)
-        ?: defaultValue ?: throw RuntimeException("Missing required variable \"$varName\"")
+        ?: defaultValue
+        ?: throw RuntimeException("Missing required variable \"$varName\"")
 
 fun getFileAsString(filePath: String) =
     String(Files.readAllBytes(Paths.get(filePath)), StandardCharsets.UTF_8)
