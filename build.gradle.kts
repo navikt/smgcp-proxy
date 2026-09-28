@@ -4,9 +4,9 @@ group = "no.nav.syfo"
 version = "1.0.0"
 
 val coroutinesVersion = "1.11.0"
-val jacksonVersion = "3.2.2"
+val jacksonVersion = "3.2.3"
 val ktorVersion = "3.6.0"
-val logbackVersion = "1.6.3"
+val logbackVersion = "1.6.4"
 val logstashEncoderVersion = "9.0"
 val prometheusVersion = "0.16.0"
 val javaxAnnotationApiVersion = "1.3.2"
@@ -21,15 +21,15 @@ val ktfmtVersion = "0.56"
 val junitJupiterVersion = "6.1.3"
 
 ///Due to vulnerabilities
-val bcprovJdk18onVersion = "1.85.2"
+val bcprovJdk18onVersion = "1.86"
 val guavaVersion = "33.7.1-jre"
 
 
 plugins {
     id("application")
     id("io.mateo.cxf-codegen") version "2.4.1"
-    kotlin("jvm") version "2.4.10"
-    id("com.diffplug.spotless") version "8.10.1"
+    kotlin("jvm") version "2.4.20"
+    id("com.diffplug.spotless") version "8.10.2"
 }
 
 application {
