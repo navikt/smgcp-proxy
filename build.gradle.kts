@@ -21,15 +21,15 @@ val ktfmtVersion = "0.56"
 val junitJupiterVersion = "6.1.3"
 
 ///Due to vulnerabilities
-val bcprovJdk18onVersion = "1.85.2"
-val guavaVersion = "33.7.1-jre"
+val bcprovJdk18onVersion = "1.86"
+val guavaVersion = "33.7.2-jre"
 
 
 plugins {
     id("application")
     id("io.mateo.cxf-codegen") version "2.4.1"
-    kotlin("jvm") version "2.4.10"
-    id("com.diffplug.spotless") version "8.10.1"
+    kotlin("jvm") version "2.4.20"
+    id("com.diffplug.spotless") version "8.10.3"
 }
 
 application {
