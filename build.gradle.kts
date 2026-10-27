@@ -4,7 +4,7 @@ group = "no.nav.syfo"
 version = "1.0.0"
 
 val coroutinesVersion = "1.11.0"
-val jacksonVersion = "3.2.3"
+val jacksonVersion = "3.2.4"
 val ktorVersion = "3.6.0"
 val logbackVersion = "1.6.5"
 val logstashEncoderVersion = "9.0"
@@ -28,8 +28,8 @@ val guavaVersion = "33.7.2-jre"
 plugins {
     id("application")
     id("io.mateo.cxf-codegen") version "2.4.1"
-    kotlin("jvm") version "2.4.20"
-    id("com.diffplug.spotless") version "8.10.3"
+    kotlin("jvm") version "2.4.21"
+    id("com.diffplug.spotless") version "8.10.4"
 }
 
 application {
