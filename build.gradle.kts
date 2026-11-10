@@ -16,13 +16,14 @@ val jaxbRuntimeVersion = "2.4.0-b180830.0438"
 val jaxbApiVersion = "2.4.0-b180830.0359"
 val javaxActivationVersion = "1.1.1"
 val commonsTextVersion = "1.15.0"
-val cxfVersion = "4.2.3"
+val cxfVersion = "4.2.4"
 val ktfmtVersion = "0.56"
 val junitJupiterVersion = "6.1.3"
 
 ///Due to vulnerabilities
 val bcprovJdk18onVersion = "1.86"
 val guavaVersion = "33.7.2-jre"
+val httpclient5CacheVersion = "5.6.4"
 
 
 plugins {
@@ -90,6 +91,9 @@ dependencies {
     constraints {
         implementation("org.bouncycastle:bcprov-jdk18on:$bcprovJdk18onVersion") {
             because("override transient from org.apache.cxf:cxf-rt-ws-security")
+        }
+        implementation("org.apache.httpcomponents.client5:httpclient5-cache:$httpclient5CacheVersion") {
+            because("Due to CVE-2026-71290")
         }
     }
     constraints {
