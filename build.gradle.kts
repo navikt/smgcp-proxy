@@ -21,7 +21,7 @@ val ktfmtVersion = "0.56"
 val junitJupiterVersion = "6.1.3"
 
 ///Due to vulnerabilities
-val bcprovJdk18onVersion = "1.86"
+val bcprovJdk18onVersion = "1.87"
 val guavaVersion = "33.8.0-jre"
 val httpclient5CacheVersion = "5.6.5"
 
