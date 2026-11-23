@@ -6,7 +6,7 @@ version = "1.0.0"
 val coroutinesVersion = "1.11.0"
 val jacksonVersion = "3.3.0"
 val ktorVersion = "3.6.1"
-val logbackVersion = "1.6.6"
+val logbackVersion = "1.6.8"
 val logstashEncoderVersion = "9.0"
 val prometheusVersion = "0.16.0"
 val javaxAnnotationApiVersion = "1.3.2"
@@ -21,7 +21,7 @@ val ktfmtVersion = "0.56"
 val junitJupiterVersion = "6.1.3"
 
 ///Due to vulnerabilities
-val bcprovJdk18onVersion = "1.86"
+val bcprovJdk18onVersion = "1.87"
 val guavaVersion = "33.8.0-jre"
 val httpclient5CacheVersion = "5.6.5"
 
